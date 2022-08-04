@@ -393,13 +393,19 @@ function () {
 
     if (this.passedElement.options) {
       this.passedElement.options.forEach(function (option) {
+        var customProperties = option.dataset.customProperties;
+
+        try {
+          customProperties = customProperties ? JSON.parse(customProperties) : undefined; // eslint-disable-next-line no-empty
+        } catch (ex) {}
+
         _this._presetChoices.push({
           value: option.value,
           label: option.innerHTML,
           selected: !!option.selected,
           disabled: option.disabled || option.parentNode.disabled,
           placeholder: option.value === '' || option.hasAttribute('placeholder'),
-          customProperties: option.dataset['customProperties']
+          customProperties: customProperties
         });
       });
     }

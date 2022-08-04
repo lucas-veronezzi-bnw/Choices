@@ -283,6 +283,15 @@ class Choices implements Choices {
     // Create array of choices from option elements
     if ((this.passedElement as WrappedSelect).options) {
       (this.passedElement as WrappedSelect).options.forEach((option) => {
+        let { customProperties } = option.dataset;
+
+        try {
+          customProperties = customProperties
+            ? JSON.parse(customProperties)
+            : undefined;
+          // eslint-disable-next-line no-empty
+        } catch (ex) {}
+
         this._presetChoices.push({
           value: option.value,
           label: option.innerHTML,
@@ -290,7 +299,7 @@ class Choices implements Choices {
           disabled: option.disabled || option.parentNode.disabled,
           placeholder:
             option.value === '' || option.hasAttribute('placeholder'),
-          customProperties: option.dataset['customProperties'],
+          customProperties,
         });
       });
     }
