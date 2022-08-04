@@ -399,7 +399,7 @@ function () {
           selected: !!option.selected,
           disabled: option.disabled || option.parentNode.disabled,
           placeholder: option.value === '' || option.hasAttribute('placeholder'),
-          customProperties: option.dataset['custom-properties']
+          customProperties: option.dataset['customProperties']
         });
       });
     }
@@ -4614,7 +4614,7 @@ var templates = {
     div.setAttribute('aria-expanded', 'false');
 
     if (labelId) {
-      div.setAttribute('aria-labeledby', labelId);
+      div.setAttribute('aria-labelledby', labelId);
     }
 
     return div;
